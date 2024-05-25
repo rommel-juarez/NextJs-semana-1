@@ -1,0 +1,22 @@
+/* styles.module.css */
+.containerCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.containerCard:hover {
+    transform: scale(1.05);
+}
+
+.containerContent {
+    width: 100%;
+    max-width: 300px;
+}

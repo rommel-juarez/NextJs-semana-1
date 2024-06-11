@@ -1,0 +1,24 @@
+.container {
+    height: 100vh;
+  }
+  
+  .formControl {
+    margin-bottom: 10px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .btnPrimary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .btnPrimary:hover {
+    background-color: #0056b3;
+  }
+  

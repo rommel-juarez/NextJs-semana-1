@@ -1,22 +1,51 @@
-/* styles.module.css */
-.containerCard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.productosContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.productosContainer p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 15px;
     background-color: #fff;
-    transition: transform 0.2s ease-in-out;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.containerCard:hover {
-    transform: scale(1.05);
+.productosContainer p:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.containerContent {
-    width: 100%;
-    max-width: 300px;
+.productosContainer p span {
+    flex-grow: 1;
+    text-align: left;
 }
+
+.productosContainer p i {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.productosContainer p i:hover {
+    color: #0056b3;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+

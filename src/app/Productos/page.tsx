@@ -1,42 +1,55 @@
 'use client';
-
+import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
-import Card from '@/Componentes/Card/index.producto';
 import styles from './styles.module.css';
 
 const fetcher = (url: string) => fetch(url).then(r => r.json());
+const deleteFetcher = async (url: string) => fetch(url, { method: "DELETE"}).then(r => r.json());
 
 const Page = () => {
-    const { data: ProductosData, error, isLoading } = useSWR('/api/producto', fetcher);
+    const router = useRouter();
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) {
-        console.error("Error loading data:", error);
-        return <div>Error loading data</div>;
+    let ProductosArray = [] as Array<producto>;
+
+    const { data: ProductosData, error, isLoading, mutate } = useSWR('/api/producto', fetcher);
+
+    if (ProductosData) ProductosArray = ProductosData;
+
+    const deleteProducto = (id: number) => {
+        deleteFetcher(`/api/producto?id=${id}`)
+        .then((data) => {
+            // router.push('/Productos')
+        }).catch((e) => {
+            // handle error
+        });
+        mutate();
     }
 
-    if (!ProductosData) return <div>No data found</div>;
+    const detailsProducto = (id: number) => {
+        router.push(`/Productos/${id}`);
+    }
 
     return (
-        <div>
-            {ProductosData.map((item: any, index: number) => (
-                <div className={styles.containerCard} key={index}>
-                    <div className={styles.containerContent}>
-                        <Card 
-                            Id={item.Id} 
-                            Nombre={item.Nombre}
-                            Descripcion={item.Descripcion}
-                            Costo={item.Costo}
-                        />  
-                    </div>
-                </div>
-            ))}
+        <div className={styles.productosContainer}>
+            <div className={styles.header}>Lista de Productos</div>
+            {ProductosArray.map((item, index) => {
+                return (
+                    <p key={index}>
+                        <span>{item.Id} - {item.Nombre} - {item.Descripcion} - ${item.Costo}</span>
+                        <i onClick={() => deleteProducto(item.Id)} className="bi bi-trash3-fill"></i>
+                        <i onClick={() => detailsProducto(item.Id)} className="bi bi-pencil-square"></i>
+                    </p>
+                )
+            })}
         </div>
-    );
+    )
 }
 
 export default Page;
 
-
-
-
+interface producto {
+    Id: number,
+    Nombre: string,
+    Descripcion: string,
+    Costo: number
+}
